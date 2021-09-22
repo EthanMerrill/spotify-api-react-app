@@ -15,16 +15,18 @@ import {BrowserRouter as Router,
 const App = (props) => {
 
   return (
+
     <div className="App">
+      <header className="App-header">
+        Jam Sort 
+      </header>
     <Router>
       <Switch>
         <Route path = "/" exact component={Redirect}/>
         <Route path ="/home" exact component = {Home}/>
       </Switch>
     </Router>
-      <header className="App-header">
-  
-      </header>
+
     </div>
   );
 }

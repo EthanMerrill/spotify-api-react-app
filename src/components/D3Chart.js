@@ -109,8 +109,8 @@ const D3Chart = (props) => {
                 {bars &&
                     bars?.map(bars => {
                         return <g>
-                        <text x={bars.x+200} y={bars.y+(barHeight/2)}>{bars?.trackName}</text>
-                            <rect x={bars.x} y={bars.y} width={bars.width} height={bars.height} style={{ fill:'#e53170'}}></rect>
+                            <text x={bars.x + 200} y={bars.y + (barHeight / 2)} style={{ fill: '#094067' }}>{bars?.trackName} </text>
+                            <rect x={bars.x} y={bars.y} width={bars.width} height={bars.height} style={{ fill:'#3da9fc', rx: '4px'}}></rect>
                         </g>
                     })
                 

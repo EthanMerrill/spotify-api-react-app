@@ -15,6 +15,8 @@ const Home = (props) => {
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songlist, setSonglist] = useState(null)
 
+    const [trackAttribute, setTrackAttribute] = useState('null')
+
     useEffect(() => {
         setToken(access_token);
     }, [access_token]);
@@ -57,28 +59,28 @@ const Home = (props) => {
 
     return (
         <div>
+            <div className='inputs-flex'>
+                <Autocomplete
+                    disablePortal
+                    id="combo-box"
+                    options={['BPM', 'intensity', 'popularity']}
+                    sx={{ width: 300 }}
+                    onChange={(event, value) => setTrackAttribute(value?.data)}
+                    renderInput={(params) => <TextField {...params} label="Attribute" />}
+                />
+                <Autocomplete
+                    disablePortal
+                    id="combo-box"
+                    options={tempPlaylists}
+                    sx={{ width: 300 }}
+                    onChange={(event, value) => setSelectedPlaylist(value?.data)}
+                    renderInput={(params) => <TextField {...params} label="Playlist" />}
+                />
+                
+            </div>
+            <hr/>
 
-            <Autocomplete
-                disablePortal
-                id="combo-box"
-                options={tempPlaylists}
-                sx={{ width: 300 }}
-                onChange={(event, value) => setSelectedPlaylist(value?.data)}
-                renderInput={(params) => <TextField {...params} label="Playlist" />}
-            />
-
-            {/* <div className = 'songlist'>
-                {songlist &&
-                    songlist?.data?.items?.map(track => {
-                        return <div key={track?.track?.id}>
-                            <li>{track?.track?.name}</li>
-                        </div>
-                    })
-                }
-
-            </div> */}
-
-            <div>
+            <div className='song-chart-frame'>
                 
                 <D3Chart data={songlist}></D3Chart>
             </div>
