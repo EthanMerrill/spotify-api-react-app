@@ -27,6 +27,14 @@
 .App-link {
   color: #61dafb;
 }
+/* https://www.happyhues.co/palettes/13 */
+.app{
+  background-color: #0f0e17;
+}
+
+#songChart{
+  background-color: azure;
+}
 
 @keyframes App-logo-spin {
   from {
