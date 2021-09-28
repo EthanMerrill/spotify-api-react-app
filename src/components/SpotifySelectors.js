@@ -17,7 +17,7 @@ const SpotifySelectors = (props) => {
     const {trackAttribute} = props
 
     //state vars
-    const [playlists, setPlaylists] = useState('no Playlists Found')
+    const [playlists, setPlaylists] = useState('No Playlists Found')
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
     // const [alignment, setAlignment] = React.useState('web');
     const [songlist, setSonglist] = useState(null)
@@ -32,7 +32,9 @@ const SpotifySelectors = (props) => {
         }
         axios.get(`https://api.spotify.com/v1/me/playlists?limit=50`, { headers: headers })
             .then((response) => {
-                setPlaylists(response)
+                setPlaylists(response?.data?.items?.map(elm => {
+                    return { label: elm.name, data: elm }
+                }))
             }, (error) => {
                 console.log(error);
             })
@@ -40,7 +42,8 @@ const SpotifySelectors = (props) => {
 
         // get songs in the playlists
     useEffect(() => {
-        if(selectedPlaylist){            
+        if(selectedPlaylist){   
+            console.log(selectedPlaylist)
             const headers = {
                 'Authorization': 'Bearer ' + access_token
             }
@@ -56,7 +59,7 @@ const SpotifySelectors = (props) => {
                 })
         }
         // console.log(songlist.data.items)
-    }, [selectedPlaylist, access_token, songlist])
+    }, [selectedPlaylist, access_token])
 
         // get the details of each song in the songlist
     useEffect(() => {
@@ -83,16 +86,9 @@ const SpotifySelectors = (props) => {
                 setSongsDetails(results)
             })
         }
-    }, [selectedPlaylist, access_token])
+    }, [selectedPlaylist, access_token, songlist, setSongsDetails])
     
 
-    //re-map the playlists to a list in the format the autocomplete can handle. 
-
-    let tempPlaylists = []
-    tempPlaylists = playlists?.data?.items?.map(elm => {
-        return { label: elm.name, data: elm }
-
-    })
 
 
     const handleChange = (event, newAlignment) => {
@@ -120,7 +116,7 @@ const SpotifySelectors = (props) => {
         <Autocomplete
             disablePortal
             id="combo-box"
-            options={tempPlaylists}
+            options={playlists}
             sx={{ width: 300 }}
             onChange={(event, value) => setSelectedPlaylist(value?.data)}
             isOptionEqualToValue={(option, value) => option.id === value.id}

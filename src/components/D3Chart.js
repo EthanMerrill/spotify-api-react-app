@@ -18,9 +18,9 @@ const D3Chart = (props) => {
     let maxAttr = Math.max.apply(Math, data?.map(function (o) { return o[trackAttribute] }))
     //use effects
     useEffect(() => {
+        
         let yScale = d3.scaleBand().domain(d3.range(data?.length)).range([0, chartHeight]).padding(.05)
         let xScale = d3.scaleLinear().domain([0, maxAttr]).range([0, 100])
-        console.log(yScale(1), xScale(1))
 
         var chartData = data?.map(d => {
             console.log(data?.indexOf(d), d[trackAttribute], xScale(d[trackAttribute]))
@@ -33,7 +33,6 @@ const D3Chart = (props) => {
             }
         })
         setBars(chartData)
-        console.log(bars)
     }, [data, chartHeight, trackAttribute])
     
 
@@ -42,7 +41,7 @@ const D3Chart = (props) => {
             <> {/*this iS A FRAGMENT}
             {/* Add a TERNARY ??, React Fragments sort of like an invisible bundler div */}
             {bars &&
-                <h2>Max {trackAttribute}: {Math.max.apply(Math, bars.map(function (o) { return o.width + 50 }))}, Average {trackAttribute}: {Math.round(Math.max.apply(Math, bars.map(function (o) { return o.width + 50 }))/bars.length,1)}</h2>
+                <h2>Max {trackAttribute}: {maxAttr}, Average {trackAttribute}: {Math.round(Math.max.apply(Math, bars.map(function (o) { return o.width + 50 }))/bars.length,1)}</h2>
             }
 
             <svg id='songChart' height={chartHeight ? chartHeight : 0} width={chartWidth}>
