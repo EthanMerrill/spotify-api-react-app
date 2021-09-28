@@ -15,76 +15,58 @@ const Home = (props) => {
     const [playlists, setPlaylists] = useState('no Playlists Found')
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songlist, setSonglist] = useState(null)
-
-    const [trackAttribute, setTrackAttribute] = useState('null')
-
+    const [songsDetails, setSongsDetails] = useState(null)
+    const [trackAttribute, setTrackAttribute] = React.useState('web');
+    
     useEffect(() => {
         setToken(access_token);
     }, [access_token]);
     //make some calls on the home component
 
 
-    useEffect(() => {
-        const headers = {
-            'Authorization': 'Bearer ' + token
-        }
-        axios.get(`https://api.spotify.com/v1/me/playlists?limit=50`, { headers: headers })
-            .then((response) => {
-                setPlaylists(response)
-            }, (error) => {
-                console.log(error);
-            })
-    }, [token]);
+    // useEffect(() => {
+    //     const headers = {
+    //         'Authorization': 'Bearer ' + token
+    //     }
+    //     axios.get(`https://api.spotify.com/v1/me/playlists?limit=50`, { headers: headers })
+    //         .then((response) => {
+    //             setPlaylists(response)
+    //         }, (error) => {
+    //             console.log(error);
+    //         })
+    // }, [token]);
 
-    useEffect(()=> {
-        const headers = {
-            'Authorization': 'Bearer ' + token
-        }
-        axios.get(`https://api.spotify.com/v1/playlists/${selectedPlaylist?.id}/tracks`, { headers: headers })
-            .then((response) => {
-                setSonglist(response)
-            }, (error) => {
-                console.log(error);
-            })
-        // console.log(songlist.data.items)
-    },[selectedPlaylist, token])
+    // useEffect(()=> {
+    //     const headers = {
+    //         'Authorization': 'Bearer ' + token
+    //     }
+    //     axios.get(`https://api.spotify.com/v1/playlists/${selectedPlaylist?.id}/tracks`, { headers: headers })
+    //         .then((response) => {
+    //             setSonglist(response)
+    //         }, (error) => {
+    //             console.log(error);
+    //         })
+    //     // console.log(songlist.data.items)
+    // },[selectedPlaylist, token])
 
 
-    //re-map the playlists to a list in the format the autocomplete can handle. 
-    let tempPlaylists = []
+    // //re-map the playlists to a list in the format the autocomplete can handle. 
+    // let tempPlaylists = []
 
-    tempPlaylists = playlists?.data?.items?.map(elm => {
-        return {label: elm.name, data: elm}
+    // tempPlaylists = playlists?.data?.items?.map(elm => {
+    //     return {label: elm.name, data: elm}
         
-    })
+    // })
 
     return (
         <div>
-            <SpotifySelectors access_token={access_token}/>
-            <div className='inputs-flex'>
-                <Autocomplete
-                    disablePortal
-                    id="combo-box"
-                    options={['BPM', 'intensity', 'popularity']}
-                    sx={{ width: 300 }}
-                    onChange={(event, value) => setTrackAttribute(value?.data)}
-                    renderInput={(params) => <TextField {...params} label="Attribute" />}
-                />
-                <Autocomplete
-                    disablePortal
-                    id="combo-box"
-                    options={tempPlaylists}
-                    sx={{ width: 300 }}
-                    onChange={(event, value) => setSelectedPlaylist(value?.data)}
-                    renderInput={(params) => <TextField {...params} label="Playlist" />}
-                />
-                
-            </div>
+            <SpotifySelectors access_token={access_token} setSongsDetails = {setSongsDetails} songsDetails = {songsDetails} trackAttribute = {trackAttribute} setTrackAttribute = {setTrackAttribute}/>
+         
             <hr/>
 
             <div className='song-chart-frame'>
                 
-                <D3Chart data={songlist}></D3Chart>
+                <D3Chart data={songsDetails} trackAttribute = {trackAttribute}></D3Chart>
             </div>
 
             {/* <SpotifyData data = {token}/> */}

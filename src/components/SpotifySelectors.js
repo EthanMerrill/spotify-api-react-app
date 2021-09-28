@@ -10,11 +10,16 @@ const SpotifySelectors = (props) => {
     //destructure
     const {access_token} = props
 
+    const {setSongsDetails} = props
+    const {songsDetails} = props
+
+    const {setTrackAttribute} = props
+    const {trackAttribute} = props
+
     //state vars
     const [playlists, setPlaylists] = useState('no Playlists Found')
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
-    const [songsDetails, setSongsDetails] = useState(null)
-    const [alignment, setAlignment] = React.useState('web');
+    // const [alignment, setAlignment] = React.useState('web');
     const [songlist, setSonglist] = useState(null)
     //const vars
 
@@ -79,6 +84,7 @@ const SpotifySelectors = (props) => {
             })
         }
     }, [selectedPlaylist, access_token])
+    
 
     //re-map the playlists to a list in the format the autocomplete can handle. 
 
@@ -90,7 +96,7 @@ const SpotifySelectors = (props) => {
 
 
     const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
+        setTrackAttribute(newAlignment);
     };
 
 
@@ -99,7 +105,7 @@ const SpotifySelectors = (props) => {
         <div className='inputs-flex'>
         <ToggleButtonGroup
             color="primary"
-            value={alignment}
+            value={trackAttribute}
             exclusive
             onChange={handleChange}
         >
