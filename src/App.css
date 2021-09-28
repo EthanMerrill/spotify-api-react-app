@@ -35,13 +35,13 @@
 .inputs-flex{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 30px;
 }
 
 #chart{
   border-radius: 6px;
-  border: 5px solid #094067;
+  border: 2px solid #094067;
   width:80%;
   padding: 30px;
   margin: 20px auto;
@@ -52,11 +52,3 @@ hr{
   margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

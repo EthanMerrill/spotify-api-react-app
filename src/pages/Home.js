@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import SpotifyData from './SpotifyData';
+import SpotifyData from '../components/SpotifyData';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import D3Chart from './D3Chart'
+import D3Chart from '../components/D3Chart'
+import SpotifySelectors from '../components/SpotifySelectors';
 
 
 const Home = (props) => {
@@ -52,13 +53,14 @@ const Home = (props) => {
     //re-map the playlists to a list in the format the autocomplete can handle. 
     let tempPlaylists = []
 
-    playlists?.data?.items?.map(elm => {
-        tempPlaylists.push({label: elm.name, data: elm})
+    tempPlaylists = playlists?.data?.items?.map(elm => {
+        return {label: elm.name, data: elm}
         
     })
 
     return (
         <div>
+            <SpotifySelectors access_token={access_token}/>
             <div className='inputs-flex'>
                 <Autocomplete
                     disablePortal
@@ -84,8 +86,10 @@ const Home = (props) => {
                 
                 <D3Chart data={songlist}></D3Chart>
             </div>
+
+            {/* <SpotifyData data = {token}/> */}
         </div>
-    )
+    ) 
 
 }
 export default Home

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const SpotifyData = (props) => {
     
+    const [apiData, setApiData] = useState('null')
+
     useEffect(() => {
         console.log(props.token)
         const headers = {"Authorizaton": "Bearer " + String(props.token)}
@@ -11,7 +13,8 @@ const SpotifyData = (props) => {
         if(props.token){
             axios.get(`https://api.spotify.com/v1/browse/new-releases`,{headers:headers})
             .then((response) => {
-                console.log(response)
+                console.log('RESPONSE', response)
+                setApiData(response)
             }, (error) => {
                 console.log(error)
             })
@@ -21,6 +24,7 @@ const SpotifyData = (props) => {
         return (
             <div>
                 <p>Spotify Data here</p>
+                <div>{apiData}</div>
             </div>
         )
 }

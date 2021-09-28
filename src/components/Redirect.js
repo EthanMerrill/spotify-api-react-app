@@ -7,7 +7,7 @@ const Redirect = (props) => {
 
     useEffect(() => {
         window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirect_uri}&response_type=token&state=123`;
-    }, []);
+    }, [clientId, redirect_uri]);
 
     return (
         <div>
