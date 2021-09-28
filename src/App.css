@@ -45,6 +45,11 @@
   width:80%;
   padding: 30px;
   margin: 20px auto;
+  
+}
+
+#songChart{
+  transition: 1s;
 }
 
 hr{
@@ -52,3 +57,6 @@ hr{
   margin-bottom: 20px;
 }
 
+rect {
+  transition-duration: 2s;
+}
