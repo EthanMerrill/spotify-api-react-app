@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SpotifyData from './SpotifyData';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -11,15 +10,13 @@ const SpotifySelectors = (props) => {
     const {access_token} = props
 
     const {setSongsDetails} = props
-    const {songsDetails} = props
 
     const {setTrackAttribute} = props
     const {trackAttribute} = props
 
     //state vars
     const [playlists, setPlaylists] = useState('No Playlists Found')
-    const [selectedPlaylist, setSelectedPlaylist] = useState([])
-    // const [alignment, setAlignment] = React.useState('web');
+    const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songlist, setSonglist] = useState(null)
     //const vars
 
@@ -42,8 +39,8 @@ const SpotifySelectors = (props) => {
 
         // get songs in the playlists
     useEffect(() => {
-        if(selectedPlaylist){   
-            console.log(selectedPlaylist)
+        // Cleaner way of doing this??
+        if(typeof(selectedPlaylist) !== 'undefined'){   
             const headers = {
                 'Authorization': 'Bearer ' + access_token
             }
@@ -51,15 +48,14 @@ const SpotifySelectors = (props) => {
                 .then((response) => {
                     setSonglist(response)
                     songlist?.items?.map(elm => {
-                        console.log(elm)
                         return elm
                     })
                 }, (error) => {
-                    console.log(error);
+                    console.log('this error', selectedPlaylist, error);
                 })
-        }
-        // console.log(songlist.data.items)
-    }, [selectedPlaylist, access_token])
+        } 
+        console.log(typeof(selectedPlaylist), selectedPlaylist)
+    }, [selectedPlaylist, access_token, songlist?.items])
 
         // get the details of each song in the songlist
     useEffect(() => {
@@ -87,8 +83,6 @@ const SpotifySelectors = (props) => {
             })
         }
     }, [selectedPlaylist, access_token, songlist, setSongsDetails])
-    
-
 
 
     const handleChange = (event, newAlignment) => {
@@ -108,7 +102,7 @@ const SpotifySelectors = (props) => {
             <ToggleButton value="danceability">danceability</ToggleButton>
             <ToggleButton value="energy">energy</ToggleButton>
             <ToggleButton value="key">key</ToggleButton>
-            <ToggleButton value="loudness">loudness</ToggleButton>
+            {/* <ToggleButton value="loudness">loudness</ToggleButton> */}
             <ToggleButton value="speechiness">speechiness</ToggleButton>
             <ToggleButton value="tempo">tempo</ToggleButton>
         </ToggleButtonGroup>

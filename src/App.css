@@ -58,5 +58,6 @@ hr{
 }
 
 rect {
-  transition-duration: 2s;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
 }
