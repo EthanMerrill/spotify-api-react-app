@@ -53,13 +53,16 @@ const SpotifySelectors = (props) => {
                 }, (error) => {
                     console.log('this error', selectedPlaylist, error);
                 })
-        } 
-        console.log(typeof(selectedPlaylist), selectedPlaylist)
-    }, [selectedPlaylist, access_token, songlist?.items])
+        } else {
+            console.log('no playlist selected')
+            setSongsDetails(null)
+            setSonglist(null)
+        }
+    }, [selectedPlaylist, access_token, songlist?.items, setSongsDetails])
 
         // get the details of each song in the songlist
     useEffect(() => {
-        if (songlist){
+        if (songlist && typeof (selectedPlaylist) !== 'undefined'){
             let promises = songlist?.data?.items?.map(track => {
                 const headers = {
                     'Authorization': 'Bearer ' + access_token
@@ -81,6 +84,8 @@ const SpotifySelectors = (props) => {
             Promise.all(promises).then(results => {
                 setSongsDetails(results)
             })
+        } else {
+            setSongsDetails(null)
         }
     }, [selectedPlaylist, access_token, songlist, setSongsDetails])
 
@@ -99,7 +104,7 @@ const SpotifySelectors = (props) => {
             exclusive
             onChange={handleChange}
         >
-            <ToggleButton value="danceability">danceability</ToggleButton>
+            <ToggleButton color='secondary' value="danceability">danceability</ToggleButton>
             <ToggleButton value="energy">energy</ToggleButton>
             <ToggleButton value="key">key</ToggleButton>
             {/* <ToggleButton value="loudness">loudness</ToggleButton> */}

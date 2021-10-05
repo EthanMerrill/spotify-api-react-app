@@ -8,7 +8,6 @@ import {BrowserRouter as Router,
 // https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
 
 
-
 // Replace with your app's client ID, redirect URI and desired scopes
 
 
