@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { text } from 'd3-fetch';
+import TextField from '@mui/material/TextField';
 
 const PlaylistInterface = (props) => {
     //deconstruct props
@@ -39,7 +39,7 @@ const PlaylistInterface = (props) => {
         }
         const data = {
             "name": playlistName,
-            "description": "Playlist Sorted by X with Jamsort",
+            "description": "Playlist Sorted with Jamsort",
             "public": true
         }
         // axios.post(`https://api.spotify.com/v1/users/${userData.data.id}/playlists`, { headers: headers, body: data})
@@ -83,16 +83,18 @@ const PlaylistInterface = (props) => {
 
         //handle textbox change event
     let textboxOnChange = (text) => {
-        console.log(text)
         setPlaylistTextbox(text)
     }
 
     return(
+        <>
         <div id='playlistInterface'>
-            <input name = 'playlistName' value={playlistTextbox} type='text' onChange = {(e)=>textboxOnChange(e.target.value)}></input>
+            <TextField id="outlined-basic" label="Playlist Name" variant="outlined" onChange={(e) => textboxOnChange(e.target.value)} value={playlistTextbox}></TextField>
             <div className='sp-button sp-flat sp-light' onClick={() => saveNew(access_token, userData, playlistTextbox, songIdOrder)} >Save as new Playlist</div>
             <div className='sp-button sp-flat sp-light' onClick={() => addToPlaylist(access_token, userData, playlist.id, songIdOrder)}>Overwrite {playlist ? playlist.name : " "} Playlist</div>
+            
         </div>
+        </>
     )
 }
 

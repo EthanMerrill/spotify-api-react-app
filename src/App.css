@@ -1,10 +1,12 @@
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 body {
   min-height: 100vh;
-  background-color: #121212;
+/* background: rgb(18,18,18); */
+background: linear-gradient(0deg, rgba(18,18,18,1) 80%, rgba(0, 0, 0, .2) 100%);
 }
 
 .App-logo {
@@ -19,8 +21,8 @@ body {
 }
 
 .App-header {
-  background: linear-gradient(325deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-  min-height: 20vh;
+  /* background: linear-gradient(325deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,12 +31,16 @@ body {
   color: white;
 }
 
+.spacer{
+  min-height: 10vh;
+}
+
 .App-link {
   color: #61dafb;
 }
 /* https://www.happyhues.co/palettes/13 */
 .App{
-  background-color: #121212;
+  background:linear-gradient(325deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)
 }
 
 .inputs-flex{
@@ -42,6 +48,7 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   margin: 30px;
+  padding-top:25px;
 }
 
 #chart{
@@ -84,16 +91,31 @@ h3, h4 {
   font-weight: 400
 }
 
+.playlistName{
+  margin:20px;
+  border-radius: 500px;
+  text-overflow: ellipsis;
+}
+
 	/* Light version */
 	.sp-button.sp-flat.sp-light {
-		background-color: rgba(0, 0, 0, 0.1);
-		color: #747474;
+		background-color: #1DB954;
+		color: #fff;
+    padding:8px 34px 8px 34px;
+    border-radius: 500px;
+    margin:20px
 	}
 	.sp-button.sp-flat.sp-light:hover {
-		background-color: rgba(0, 0, 0, 0.2);
-		color: #686868;
+    transform:scale(1.1)
 	}
 	.sp-button.sp-flat.sp-light:active {
-		background-color: rgba(0, 0, 0, 0.3);
-		color: #585858;
+
 	}
+
+#playlistInterface{
+  display:flex;
+  flex-direction:horizontal;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+}

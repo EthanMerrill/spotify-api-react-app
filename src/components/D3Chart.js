@@ -108,7 +108,7 @@ const D3Chart = (props) => {
             })
             setBars(chartData)
         }
-    }, [data, chartHeight, trackAttribute, playlistStats, orderMethod, sortedData])
+    }, [data, chartHeight, trackAttribute, playlistStats, orderMethod, sortedData, setSongIdOrder])
 
     const handleChange = (event, newAlignment) => {
         setOrderMethod(newAlignment);

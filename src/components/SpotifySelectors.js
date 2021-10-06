@@ -95,12 +95,23 @@ const SpotifySelectors = (props) => {
 
     const handleChange = (event, newAlignment) => {
         setTrackAttribute(newAlignment);
+        
     };
 
 
     //jsx return
     return (<>
+
         <div className='inputs-flex'>
+        <Autocomplete
+            disablePortal
+            id="combo-box"
+            options={playlists}
+            sx={{ width: 300 }}
+            onChange={(event, value) => setSelectedPlaylist(value?.data)}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+            renderInput={(params) => <TextField {...params} label="Playlist" />}
+        />
         <ToggleButtonGroup
             color="primary"
             value={trackAttribute}
@@ -115,15 +126,7 @@ const SpotifySelectors = (props) => {
             <ToggleButton value="tempo">tempo</ToggleButton>
         </ToggleButtonGroup>
 
-        <Autocomplete
-            disablePortal
-            id="combo-box"
-            options={playlists}
-            sx={{ width: 300 }}
-            onChange={(event, value) => setSelectedPlaylist(value?.data)}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            renderInput={(params) => <TextField {...params} label="Playlist" />}
-        />
+
         </div>
     </>
     )
