@@ -106,7 +106,8 @@ h3, h4 {
     margin:20px
 	}
 	.sp-button.sp-flat.sp-light:hover {
-    transform:scale(1.1)
+    transform:scale(1.1);
+    cursor:pointer;
 	}
 	.sp-button.sp-flat.sp-light:active {
 
@@ -118,4 +119,25 @@ h3, h4 {
   justify-content: center;
   align-items: center;
   padding-bottom: 40px;
+}
+
+.sort-controls{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-controls h3{
+  padding-right:25px;
+}
+
+.mini-box{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.mini-box h3 {
+  padding-right: 25px;
 }

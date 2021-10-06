@@ -4,6 +4,6 @@
 ## Todo:
 - [ ] Use multi track api call in order to load long playlists without rate limiting
 - [x] Add labeling to visualization
-- [ ] visualize min, max, mean in the svg
+~- [ ] visualize min, max, mean in the svg~
 - [x] Clear vis when the playlist is cleared
 - [x] Host on Github Pages

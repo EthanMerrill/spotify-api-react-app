@@ -12,8 +12,9 @@ const App = (props) => {
   return (
 
     <div className="App">
+      
       <header className="App-header">
-        
+
           <h2>Jam Sort</h2>
         
       </header>

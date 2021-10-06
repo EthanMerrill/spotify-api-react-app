@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import * as d3 from 'd3'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { chipClasses } from '@mui/material';
 
 // https://www.youtube.com/watch?v=zXBdNDnqV2Q
 
@@ -43,12 +44,12 @@ const D3Chart = (props) => {
     useEffect(() => {
         if (data !== null){
             switch (orderMethod) {
-                case 'Ascending':
+                case 'Descending':
                     setSortedData([...data].sort((a, b) => {
                         return b[trackAttribute] - a[trackAttribute]
                     }))
                     break
-                case 'Descending':
+                case 'Ascending':
                    setSortedData([...data].sort((a, b) => {
                         return a[trackAttribute] - b[trackAttribute]
                     }))
@@ -116,7 +117,9 @@ const D3Chart = (props) => {
 
     return (
         <> {/*this iS A FRAGMENT*/}
+        
         <div className = 'sort-controls'>
+            <h3>Sort Method  </h3>
                 <ToggleButtonGroup
                     color="primary"
                     value={orderMethod}

@@ -20,8 +20,10 @@ const Home = (props) => {
          
             <hr/>
             <div className='song-chart-frame'>
-                <PlaylistInterface playlist={selectedPlaylist} access_token={access_token} songIdOrder={songIdOrder}/>
-                <D3Chart data={songsDetails} trackAttribute = {trackAttribute} setSongIdOrder = {setSongIdOrder}/>
+                <PlaylistInterface playlist={selectedPlaylist} access_token={access_token} songIdOrder={songIdOrder} />
+                <D3Chart data={songsDetails} trackAttribute = {trackAttribute} setSongIdOrder = {setSongIdOrder}>
+                   
+                </D3Chart>
             </div>
 
         </div>

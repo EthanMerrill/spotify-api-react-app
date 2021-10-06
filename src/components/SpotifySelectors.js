@@ -95,7 +95,7 @@ const SpotifySelectors = (props) => {
 
     const handleChange = (event, newAlignment) => {
         setTrackAttribute(newAlignment);
-        
+
     };
 
 
@@ -112,6 +112,8 @@ const SpotifySelectors = (props) => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderInput={(params) => <TextField {...params} label="Playlist" />}
         />
+        <div className='mini-box'>
+        <h3> Sort Metric</h3>
         <ToggleButtonGroup
             color="primary"
             value={trackAttribute}
@@ -125,7 +127,7 @@ const SpotifySelectors = (props) => {
             <ToggleButton value="speechiness">speechiness</ToggleButton>
             <ToggleButton value="tempo">tempo</ToggleButton>
         </ToggleButtonGroup>
-
+            </div>
 
         </div>
     </>
