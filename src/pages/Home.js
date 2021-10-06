@@ -2,8 +2,6 @@ import React, {useState } from 'react';
 import D3Chart from '../components/D3Chart'
 import SpotifySelectors from '../components/SpotifySelectors';
 
-
-
 const Home = (props) => {
     const hash = window.location.hash
     const access_token = hash.substring(14, hash.indexOf('&token_type'))
