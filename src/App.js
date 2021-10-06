@@ -18,7 +18,7 @@ const App = (props) => {
     <Router>
       <Switch>
           <Route path= "/spotify-api-react-app" exact component={Redirect}/>
-          <Route path="/spotify-api-react-app/home" exact component = {Home}/>
+          <Route path="/spotify-api-react-app/index" exact component = {Home}/>
       </Switch>
     </Router>
     </div>
