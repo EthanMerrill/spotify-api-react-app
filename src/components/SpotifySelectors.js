@@ -13,10 +13,12 @@ const SpotifySelectors = (props) => {
 
     const {setTrackAttribute} = props
     const {trackAttribute} = props
-
+    
+    const {setSelectedPlaylist} = props
+    const {selectedPlaylist} = props
     //state vars
     const [playlists, setPlaylists] = useState('No Playlists Found')
-    const [selectedPlaylist, setSelectedPlaylist] = useState(null)
+    // const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songlist, setSonglist] = useState(null)
     //const vars
 
@@ -35,6 +37,7 @@ const SpotifySelectors = (props) => {
             }, (error) => {
                 console.log(error);
             })
+
     }, [access_token]);
 
         // get songs in the playlists

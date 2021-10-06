@@ -9,6 +9,7 @@ const D3Chart = (props) => {
     // destructure props
     const { data } = props // don't want to see props other places. 
     const { trackAttribute } = props
+    const {setSongIdOrder} = props
     // State Variables
     const [sortedData, setSortedData] = useState(null)
     const [bars, setBars] = useState(null)
@@ -89,6 +90,10 @@ const D3Chart = (props) => {
         if (typeof (sortedData) !== 'undefined') {
             let yScale = d3.scaleBand().domain(d3.range(data?.length)).range([0, chartHeight-chartOffset]).padding(.05)
             let xScale = d3.scaleLinear().domain([0, playlistStats.max]).range([0, 100])
+            
+            setSongIdOrder(sortedData?.map(d => {
+                return `spotify:track:${d.id}`
+            }))
 
             let chartData = sortedData?.map(d => {
 
@@ -99,6 +104,7 @@ const D3Chart = (props) => {
                     width: xScale(d[trackAttribute]),
                     height: barHeight,
                 }
+            
             })
             setBars(chartData)
         }
@@ -144,17 +150,17 @@ const D3Chart = (props) => {
                 <line x1={0} x2={chartWidth} y1={chartOffset-15} y2={chartOffset-15} stroke='white' strokeWidth='.1' />
                 
 
-                {data &&
+                {data && bars &&
                     bars?.map(bars => {
                         return <g key={bars.y}>
-                            <text x={bars.x + 110} y={bars.y + (barHeight / 2)+chartOffset} style={{ fill: '#FFFFFF' }}>{bars?.trackName} </text>
+                            <text x={bars.x + 110} y={bars.y + (barHeight/1.5)+chartOffset} style={{ fill: '#FFFFFF' }}>{bars?.trackName} </text>
                             <rect x={bars.x} y={bars.y + chartOffset} width={bars.width} height={bars.height} style={{ fill:'#1DB954', rx: '4px'}}></rect>
                             
                         </g>
                     })
                 
                 }
-                {data &&
+                {data && bars &&
                     <g>
 
                     <line x1={Math.max.apply(Math, bars.map(function (o) { return o.width + 50 }))} y1={chartOffset} x2={Math.max.apply(Math, bars.map(function (o) { return o.width+50 }))} y2={chartHeight} stroke='white' strokeWidth=".3" />
