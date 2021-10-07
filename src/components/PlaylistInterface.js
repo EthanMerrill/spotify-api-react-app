@@ -59,6 +59,11 @@ const PlaylistInterface = (props) => {
                     headers: headers,
                     data: {"uris": playlistSongs}
                 }).then((response)=>{
+                    if (response.status === 201){
+                        alert(`Playlist Saved as: ${data.name}`)
+                    }else{
+                        alert(`error: ${response.status}, ${response.statusText}`)
+                    }
                     console.log(response)
                 })  
             
@@ -78,6 +83,11 @@ const PlaylistInterface = (props) => {
             headers: headers,
             data: { "uris": playlistSongs }
         }).then((response=>{
+            if (response.status === 201) {
+                alert('Playlist Overwritten!')
+            } else {
+                alert(`error: ${response.status}, ${response.statusText}`)
+            }
             console.log(response)
         }))
     }
