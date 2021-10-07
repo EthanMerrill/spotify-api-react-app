@@ -65,37 +65,56 @@ const SpotifySelectors = (props) => {
 
         // get the details of each song in the songlist
     useEffect(() => {
-        if (songlist && typeof (selectedPlaylist) !== 'undefined'){
+
+        //Function to get all song information and details, up to 50 tracks at a time:
+        const get50SongsDetails = (songlist) => {
             const headers = {
                 'Authorization': 'Bearer ' + access_token
             }
-            let trackids = songlist?.data?.items?.map(track=> {
-                return(track.track.id)
+            let trackids = songlist?.data?.items?.map(track => {
+                return (track.track.id)
             })
             let promises = axios({
                 method: 'GET',
                 url: `https://api.spotify.com/v1/audio-features/?ids=${String(trackids)}`,
-                headers:headers
-            }).then((response) =>{
-                
+                headers: headers
+            }).then((response) => {
+
                 // console.log(response.data.audio_features)
                 // console.log(songlist.data.items)
                 let res = songlist.data.items.map(track => {
-                    return Object.assign(track, response.data.audio_features.find(elm=>elm?.id === track?.track?.id))})
+                    return Object.assign(track, response.data.audio_features.find(elm => elm?.id === track?.track?.id))
+                })
                 return (res)
             }, (error) => {
                 console.log(error)
                 alert(error)
                 return (error)
             })
-            
+
             Promise.resolve(promises).then(results => {
                 setSongsDetails(results)
             })
+        }
+
+
+        if (songlist && typeof (selectedPlaylist) !== 'undefined'){
+            // let fullSongsDetails = []
+            // console.log(songlist?.data?.items.length)
+            // for(let i=0; i<songlist?.data?.items.length;i=i+50){
+            //     fullSongsDetails.push(...songlist?.data?.items?.slice(i, i + 50))
+            // }
+            // console.log(fullSongsDetails)
+           setSongsDetails(get50SongsDetails(songlist))
         } else {
             setSongsDetails(null)
         }
+
+
     }, [selectedPlaylist, access_token, songlist, setSongsDetails])
+
+    
+
 
 
     const handleChange = (event, newAlignment) => {

@@ -88,13 +88,14 @@ const D3Chart = (props) => {
 
     useEffect(() => {
         if (typeof (sortedData) !== 'undefined') {
+            // console.log(sortedData)
             let yScale = d3.scaleBand().domain(d3.range(data?.length)).range([0, chartHeight-chartOffset]).padding(.05)
             let xScale = d3.scaleLinear().domain([0, playlistStats.max]).range([0, 100])
-            
+
             setSongIdOrder(sortedData?.map(d => {
                 return `spotify:track:${d?.id}`
             }))
-
+            
             let chartData = sortedData?.map(d => {
                 return {
                     trackName: d?.track?.name,
