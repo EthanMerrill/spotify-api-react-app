@@ -3,13 +3,15 @@ import React, { useEffect } from 'react';
 
 const Redirect = (props) => {
     const clientId = process.env.REACT_APP_CLIENT_KEY;
-    let redirect_uri = String(window.location.href)
-
-    if (redirect_uri[redirect_uri.length-1]==="/") {
+    let redirect_uri = ''
+    console.log(redirect_uri)
+    if (String(window.location.href)[String(window.location.href).length-1]==="/") {
         redirect_uri = `${window.location.href}index`;
     }else{
         redirect_uri = `${window.location.href}/index`;
     }
+    console.log(redirect_uri)
+
     
     const scopes = 'playlist-modify-private playlist-read-private playlist-modify-public'
     useEffect(() => {
