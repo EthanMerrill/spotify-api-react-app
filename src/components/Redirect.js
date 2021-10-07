@@ -5,7 +5,7 @@ const Redirect = (props) => {
     const clientId = process.env.REACT_APP_CLIENT_KEY;
     let redirect_uri = String(window.location.href)
 
-    if (redirect_uri[redirect_uri.lengt-1]==="/") {
+    if (redirect_uri[redirect_uri.length-1]==="/") {
         redirect_uri = `${window.location.href}index`;
     }else{
         redirect_uri = `${window.location.href}/index`;
