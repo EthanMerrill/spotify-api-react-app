@@ -92,13 +92,12 @@ const D3Chart = (props) => {
             let xScale = d3.scaleLinear().domain([0, playlistStats.max]).range([0, 100])
             
             setSongIdOrder(sortedData?.map(d => {
-                return `spotify:track:${d.id}`
+                return `spotify:track:${d?.id}`
             }))
 
             let chartData = sortedData?.map(d => {
-
                 return {
-                    trackName: d?.name,
+                    trackName: d?.track?.name,
                     x: 50,
                     y: yScale(sortedData?.indexOf(d)),
                     width: xScale(d[trackAttribute]),

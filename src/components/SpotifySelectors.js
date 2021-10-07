@@ -66,25 +66,30 @@ const SpotifySelectors = (props) => {
         // get the details of each song in the songlist
     useEffect(() => {
         if (songlist && typeof (selectedPlaylist) !== 'undefined'){
-            let promises = songlist?.data?.items?.map(track => {
-                const headers = {
-                    'Authorization': 'Bearer ' + access_token
-                }
-                return axios.get(`https://api.spotify.com/v1/audio-features/${track.track.id}`, { headers: headers })
-                    .then((response) => {
-                        // console.log(track.track.name, track.track.popularity, track.track.id, response)
-                        let resp = (response?.data)
-                        resp['name'] = (track.track.name)
-                        resp['popularity'] = (track.track.popularity)
-
-                        return(resp)
-                    }, (error) => {
-                        console.log(error)
-                        return(error)
-                    })
-                    
+            const headers = {
+                'Authorization': 'Bearer ' + access_token
+            }
+            let trackids = songlist?.data?.items?.map(track=> {
+                return(track.track.id)
             })
-            Promise.all(promises).then(results => {
+            let promises = axios({
+                method: 'GET',
+                url: `https://api.spotify.com/v1/audio-features/?ids=${String(trackids)}`,
+                headers:headers
+            }).then((response) =>{
+                
+                // console.log(response.data.audio_features)
+                // console.log(songlist.data.items)
+                let res = songlist.data.items.map(track => {
+                    return Object.assign(track, response.data.audio_features.find(elm=>elm?.id === track?.track?.id))})
+                return (res)
+            }, (error) => {
+                console.log(error)
+                alert(error)
+                return (error)
+            })
+            
+            Promise.resolve(promises).then(results => {
                 setSongsDetails(results)
             })
         } else {
