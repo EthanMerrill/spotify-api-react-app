@@ -17,7 +17,7 @@ const SpotifySelectors = (props) => {
     const {setSelectedPlaylist} = props
     const {selectedPlaylist} = props
     //state vars
-    const [playlists, setPlaylists] = useState('No Playlists Found')
+    const [playlists, setPlaylists] = useState(['No Playlists Found'])
     // const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songlist, setSonglist] = useState(null)
     //const vars

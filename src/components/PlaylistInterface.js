@@ -10,7 +10,7 @@ const PlaylistInterface = (props) => {
    
     // state vars
     const [userData, setUserData] = useState(null)
-    const [playlistTextbox, setPlaylistTextbox] = useState(null)
+    const [playlistTextbox, setPlaylistTextbox] = useState("")
 
     // use effects
         // update the textbox
@@ -23,7 +23,6 @@ const PlaylistInterface = (props) => {
         }
         axios.get(`https://api.spotify.com/v1/me/`, { headers: headers })
             .then((response) => {
-                console.log(response.data.id)
                 setUserData(response)
             }, (error) => {
                 console.log(error);
@@ -59,7 +58,9 @@ const PlaylistInterface = (props) => {
                     url: `https://api.spotify.com/v1/playlists/${response.data.id}/tracks`,
                     headers: headers,
                     data: {"uris": playlistSongs}
-                })
+                }).then((response)=>{
+                    console.log(response)
+                })  
             
         }, (error) => {
             console.log(error);

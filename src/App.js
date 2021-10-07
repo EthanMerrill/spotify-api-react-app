@@ -18,14 +18,14 @@ const App = (props) => {
           <h2>Jam Sort</h2>
         
       </header>
-      <body>
+      <div className='body'>
       <Router>
         <Switch>
             <Route path= "/spotify-api-react-app/" exact component={Redirect}/>
             <Route path="/spotify-api-react-app/index" exact component = {Home}/>
         </Switch>
       </Router>
-      </body>
+      </div>
     </div>
   );
 }

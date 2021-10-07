@@ -7,3 +7,4 @@
 ~- [ ] visualize min, max, mean in the svg~
 - [x] Clear vis when the playlist is cleared
 - [x] Host on Github Pages
+- [ ] Add a confirmation alert that the playlist was saved
