@@ -41,7 +41,8 @@ const D3Chart = (props) => {
     
         // a method to sort the playlist
     useEffect(() => {
-        if (data !== null){
+        if (data){
+            console.log(data, typeof (data))
             switch (orderMethod) {
                 case 'Descending':
                     setSortedData([...data].sort((a, b) => {
@@ -88,7 +89,7 @@ const D3Chart = (props) => {
 
     useEffect(() => {
         if (typeof (sortedData) !== 'undefined') {
-            // console.log(sortedData)
+            console.log(sortedData)
             let yScale = d3.scaleBand().domain(d3.range(data?.length)).range([0, chartHeight-chartOffset]).padding(.05)
             let xScale = d3.scaleLinear().domain([0, playlistStats.max]).range([0, 100])
 

@@ -127,6 +127,7 @@ const SpotifySelectors = (props) => {
     return (<>
 
         <div className='inputs-flex'>
+            <div className="autocomplete-container">
         <Autocomplete
             disablePortal
             id="combo-box"
@@ -136,6 +137,7 @@ const SpotifySelectors = (props) => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderInput={(params) => <TextField {...params} label="Playlist" />}
         />
+            </div>
         <div className='mini-box'>
         <h3> Sort Metric</h3>
         <ToggleButtonGroup
@@ -144,7 +146,7 @@ const SpotifySelectors = (props) => {
             exclusive
             onChange={handleChange}
         >
-            <ToggleButton color='secondary' value="danceability">danceability</ToggleButton>
+            <ToggleButton value="danceability">danceability</ToggleButton>
             <ToggleButton value="energy">energy</ToggleButton>
             <ToggleButton value="key">key</ToggleButton>
             {/* <ToggleButton value="loudness">loudness</ToggleButton> */}
