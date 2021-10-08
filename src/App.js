@@ -15,7 +15,7 @@ const App = (props) => {
       
       <header className="App-header">
 
-          <h2>Jam Sort</h2>
+          <h2>JamSort</h2>
         
       </header>
       <div className='body'>
