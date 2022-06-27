@@ -13,7 +13,7 @@ const Redirect = (props) => {
     console.log(redirect_uri)
 
     
-    const scopes = 'playlist-modify-private playlist-read-private playlist-modify-public'
+    const scopes = 'playlist-modify-private playlist-read-private playlist-modify-public user-read-currently-playing user-read-recently-played'
     useEffect(() => {
         window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirect_uri}&response_type=token&state=123`;
 
