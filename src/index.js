@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Redirect from './components/Redirect';
 
 //pull in use styles from material u core. Pass in the degailt theme object
 //
