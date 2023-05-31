@@ -3,30 +3,42 @@ import axios from 'axios';
 
 
 const SpotifyData = (props) => {
-    
-    const [apiData, setApiData] = useState('null')
+    const [apiData, setApiData] = useState(null)
+    //destructure
+    const { access_token } = props
+
 
     useEffect(() => {
-        console.log(props.token)
-        const headers = {"Authorizaton": "Bearer " + String(props.token)}
-        // https://designcode.io/react-hooks-handbook-fetch-data-from-an-api
-        if(props.token){
-            axios.get(`https://api.spotify.com/v1/browse/new-releases`,{headers:headers})
-            .then((response) => {
-                console.log('RESPONSE', response)
-                setApiData(response)
-            }, (error) => {
-                console.log(error)
-            })
+        console.log("running useEffect", access_token)
+        const headers = {
+            'Authorization': 'Bearer ' + access_token
         }
-    }, [props.token])
+        // https://designcode.io/react-hooks-handbook-fetch-data-from-an-api
+        if (access_token) {
+            axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, { headers: headers })
+                .then((response) => {
+                    if (response.status === 204) {
+                        axios.get(`https://api.spotify.com/v1/me/player/recently-played?market=US`, { headers: headers })
+                            .then((response) => {
+                                console.log('RESPONSE', response.data)
+                                setApiData(response.data)
+                            }, (error) => {
+                                console.log(error)
+                            }
+                            )
+                    }
+                }, (error) => {
+                    console.log(error)
+                })
 
-        return (
-            <div>
-                <p>Spotify Data here</p>
-                <div>{apiData}</div>
-            </div>
-        )
+        }
+    }, [access_token])
+
+    return (
+        <div>
+            {access_token ? <div>{apiData}</div> : null}
+        </div>
+    )
 }
 
 export default SpotifyData
