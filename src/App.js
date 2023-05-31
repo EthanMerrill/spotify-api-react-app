@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import Home from "./pages/Home";
+import JamSort from "./pages/JamSort";
+import GenreCheck from "./pages/GenreCheck";
 import Redirect from './components/Redirect'
 import {BrowserRouter as Router,
   Switch,
@@ -22,7 +23,9 @@ const App = (props) => {
       <Router>
         <Switch>
             <Route path= "/spotify-api-react-app/" exact component={Redirect}/>
-            <Route path="/spotify-api-react-app/index" exact component = {Home}/>
+            <Route path= "/spotify-api-react-app/index" exact component={JamSort}/>
+            <Route path="/spotify-api-react-app/jamsort" exact component = {JamSort}/>
+            <Route path="/spotify-api-react-app/genreCheck" exact component = {GenreCheck}/>
         </Switch>
       </Router>
       </div>
