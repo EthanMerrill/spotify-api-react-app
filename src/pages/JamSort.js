@@ -7,7 +7,7 @@ import SpotifyData from '../components/SpotifyData';
 const JamSort = (props) => {
     const hash = window.location.hash
     const access_token = hash.substring(14, hash.indexOf('&token_type'))
-
+    console.log(access_token)
 
     const [songsDetails, setSongsDetails] = useState(null)
     const [trackAttribute, setTrackAttribute] = React.useState('tempo');

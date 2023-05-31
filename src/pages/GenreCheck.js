@@ -1,7 +1,11 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
+import SpotifyData from "../components/SpotifyData";
+
 
 const GenreCheck = (props) => {
+    const hash = window.location.hash
+    const access_token = hash.substring(14, hash.indexOf('&token_type'))
     // destructure props
     // const {propName} = props
 
@@ -16,7 +20,7 @@ const GenreCheck = (props) => {
     // JSX return
     return(
         <>
-
+            <SpotifyData access_token={access_token}/>
         </>
     )
 }
