@@ -30,6 +30,30 @@ background: linear-gradient(0deg, rgba(18,18,18,1) 80%, rgba(0, 0, 0, .2) 100%);
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.auth-block{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px;
+  padding-top:25px;
+}
+
+.auth-text{
+  color:#fff;
+  text-decoration: none;
+}
+
+a{
+  color:#fff;
+  text-decoration: none;
+}
+
+a:hover{
+  color:#fff;
+  text-decoration: underline;
+}
 
 .spacer{
   min-height: 10vh;
@@ -72,6 +96,15 @@ background: linear-gradient(0deg, rgba(18,18,18,1) 80%, rgba(0, 0, 0, .2) 100%);
 
 #songChart{
   transition: 1s;
+}
+
+.subtitle{
+  padding-top: 25px;
+}
+
+p{
+  color: #b3b3b3;
+  font-weight: 400
 }
 
 hr{

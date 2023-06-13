@@ -1,13 +1,9 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import D3Chart from '../components/D3Chart'
 import SpotifySelectors from '../components/SpotifySelectors';
 import PlaylistInterface from '../components/PlaylistInterface';
 import SpotifyData from '../components/SpotifyData';
-import Redirect from '../components/Redirect';
-import {BrowserRouter as Router,
-    Switch,
-    Route, 
-  Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const JamSort = (props) => {
     const hash = window.location.hash
@@ -20,25 +16,37 @@ const JamSort = (props) => {
     const [trackAttribute, setTrackAttribute] = React.useState('tempo');
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [songIdOrder, setSongIdOrder] = useState(null)
-    
-    return (
-        
-        <div>
-            {access_token.length === 0  && <Link to='/spotify-api-react-app/'>authenticate with Spotify</Link>}
-            <SpotifyData access_token={access_token}/>
-            <SpotifySelectors className = "card" access_token={access_token} setSongsDetails = {setSongsDetails} trackAttribute = {trackAttribute} setTrackAttribute = {setTrackAttribute} setSelectedPlaylist = {setSelectedPlaylist} selectedPlaylist = {selectedPlaylist}/>
-         
-            <hr/>
-            <div className='song-chart-frame'>
-                <PlaylistInterface playlist={selectedPlaylist} access_token={access_token} songIdOrder={songIdOrder} />
-                <D3Chart data={songsDetails} trackAttribute = {trackAttribute} setSongIdOrder = {setSongIdOrder}>
-                   
-                </D3Chart>
+
+    if (access_token.length === 0) {
+        return (
+            <div>
+                <h1 className='subtitle'>Spotify API React App</h1>
+                <p className='informational-text'>This app lets you sort your playlists by energy, dancability and more. Authenticate with Spotify to get started!</p>
+<div className='auth-block'>
+                <div className='sp-button sp-flat sp-light'>
+                <Link className='auth-text' to='/spotify-api-react-app/'>Authenticate with Spotify</Link>
+                </div>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <SpotifyData access_token={access_token} />
+                <SpotifySelectors className="card" access_token={access_token} setSongsDetails={setSongsDetails} trackAttribute={trackAttribute} setTrackAttribute={setTrackAttribute} setSelectedPlaylist={setSelectedPlaylist} selectedPlaylist={selectedPlaylist} />
+
+                <hr />
+                <div className='song-chart-frame'>
+                    <PlaylistInterface playlist={selectedPlaylist} access_token={access_token} songIdOrder={songIdOrder} />
+                    <D3Chart data={songsDetails} trackAttribute={trackAttribute} setSongIdOrder={setSongIdOrder}>
+
+                    </D3Chart>
+                </div>
+
             </div>
 
-        </div>
-        
-    ) 
+        )
 
+    }
 }
 export default JamSort
