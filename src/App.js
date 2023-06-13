@@ -28,8 +28,8 @@ const App = (props) => {
             <Route path="/spotify-api-react-app/jamsort" exact component = {JamSort}/>
             <Route path="/spotify-api-react-app/genrecheck" exact component = {GenreCheck}/>
         </Switch>
-          <Link to="/spotify-api-react-app/jamsort">jamsort</Link> |{" "}
-          <Link to="/spotify-api-react-app/genrecheck">genrecheck</Link> |{" "}
+          <Link to="/spotify-api-react-app/jamsort">Jamsort</Link> |{" "}
+          <Link to="/spotify-api-react-app/genrecheck">Genrecheck</Link> |{" "}
       </Router>
       </div>
     </div>

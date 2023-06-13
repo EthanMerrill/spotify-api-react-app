@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 
 const Redirect = (props) => {
-    const clientId = process.env.REACT_APP_CLIENT_KEY;
+    
+    const clientId = process.env.REACT_APP_CLIENT_ID;
+    console.log('clientid', clientId)
     let redirect_uri = ''
     if (String(window.location.href)[String(window.location.href).length-1]==="/") {
         redirect_uri = `${window.location.href}index`;
@@ -16,7 +18,7 @@ const Redirect = (props) => {
     
     const scopes = 'playlist-modify-private playlist-read-private playlist-modify-public user-read-currently-playing user-read-recently-played'
     useEffect(() => {
-        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirect_uri}&response_type=code&state=123`;
+        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirect_uri}&response_type=token&state=123`;
 
 
     }, [clientId, redirect_uri]);
